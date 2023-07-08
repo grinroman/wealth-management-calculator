@@ -24,29 +24,29 @@ const Calculator: React.FC = () => {
               minValue={1000000}
               maxValue={10000000}
               stepValue={100000}
-              label="Initial capital"
-              measureLabel="€"
+              textLabel="Initial capital"
+              measureTextLabel="€"
             />
             <SliderWithInput
               minValue={1}
               maxValue={30}
               stepValue={1}
-              label="Investment duration"
-              measureLabel="years"
+              textLabel="Investment duration"
+              measureTextLabel="years"
             />
             <SliderWithInput
               minValue={1}
               maxValue={100}
               stepValue={1}
-              label="Annual gain expectation"
-              measureLabel="%"
+              textLabel="Annual gain expectation"
+              measureTextLabel="%"
             />
             <SliderWithInput
               minValue={1}
               maxValue={10}
               stepValue={0.1}
-              label="Wealth management & product fees"
-              measureLabel="%"
+              textLabel="Wealth management & product fees"
+              measureTextLabel="%"
             />
           </Paper>
         </Grid>

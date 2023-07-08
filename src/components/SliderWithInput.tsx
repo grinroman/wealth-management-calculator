@@ -8,16 +8,16 @@ type SliderWithInputProps = {
   minValue: number;
   maxValue: number;
   stepValue: number;
-  label: string;
-  measureLabel: string;
+  textLabel: string;
+  measureTextLabel: string;
 };
 
 const SliderWithInput: React.FC<SliderWithInputProps> = ({
   minValue,
   maxValue,
   stepValue,
-  label,
-  measureLabel,
+  textLabel,
+  measureTextLabel,
 }) => {
   const [value, setValue] = useState<number>(minValue);
 
@@ -36,7 +36,7 @@ const SliderWithInput: React.FC<SliderWithInputProps> = ({
         }}
       >
         <Typography preset="common-1" color="darkgreyed" fontFamily="poppins">
-          {label}
+          {textLabel}
         </Typography>
         <Box
           sx={{
@@ -67,7 +67,7 @@ const SliderWithInput: React.FC<SliderWithInputProps> = ({
             color="darkgreyed"
             fontFamily="poppins"
           >
-            {measureLabel}
+            {measureTextLabel}
           </Typography>
         </Box>
       </Box>
