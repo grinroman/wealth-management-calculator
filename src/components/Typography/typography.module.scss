@@ -1,17 +1,16 @@
-.blacked {
-  color: #141415;
+@import 'src/styles/mixins.scss';
+
+@each $color, $_ in $am-colors {
+  .#{$color} {
+    color: get-color($color, base);
+  }
 }
-.darkgreyed {
-  color: #333333;
-}
-.greyed {
-  color: #7d7d7d;
-}
+
 .poppins {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 .object-sants {
-  font-family: "Object Sans", sans-serif;
+  font-family: 'Object Sans', sans-serif;
 }
 .left {
   text-align: left;
@@ -49,7 +48,6 @@
   line-height: 130%;
 }
 .price-1 {
-  text-align: right;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;

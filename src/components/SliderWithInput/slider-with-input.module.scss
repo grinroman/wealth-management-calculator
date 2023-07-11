@@ -1,0 +1,34 @@
+@import 'src/styles/mixins.scss';
+
+.root {
+  &__textinfo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+      max-width: 150px;
+    }
+
+    &__valuewr {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      &__valuebrdr {
+        border-radius: 8px;
+        border: 1px solid get-color(bordered, base);
+        padding: 8px 12px;
+      }
+    }
+  }
+  &__slider {
+    & .MuiSlider-thumb {
+      color: '#ffffff';
+      height: 16px;
+      width: 16px;
+    }
+  }
+}

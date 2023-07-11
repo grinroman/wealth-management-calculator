@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Slider, TextField, Box, Paper } from '@mui/material';
-import Typography from './Typography';
-import { splitZeros } from 'calculations/splitZeros';
+import { Slider, Box } from '@mui/material';
+import Typography from '../Typography';
+import { splitEvery3DigitWithSpace } from 'calculations/common/splitEvery3DigitWithSpace';
+import styles from './slider-with-input.module.scss';
 
 type SliderWithInputProps = {
   minValue: number;
@@ -10,6 +11,8 @@ type SliderWithInputProps = {
   stepValue: number;
   textLabel: string;
   measureTextLabel: string;
+  sliderValue: number;
+  setSliderValue: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SliderWithInput: React.FC<SliderWithInputProps> = ({
@@ -18,48 +21,29 @@ const SliderWithInput: React.FC<SliderWithInputProps> = ({
   stepValue,
   textLabel,
   measureTextLabel,
+  sliderValue,
+  setSliderValue,
 }) => {
-  const [value, setValue] = useState<number>(minValue);
-
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number);
+  const sliderChangeHandler = (event: Event, newValue: number | number[]) => {
+    setSliderValue(newValue as number);
   };
 
   return (
-    <Box>
-      <Box
-        sx={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Typography preset="common-1" color="darkgreyed" fontFamily="poppins">
-          {textLabel}
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '10px;',
-          }}
-        >
-          <Box
-            sx={{
-              borderRadius: '8px',
-              border: '1px solid #DDDCE0',
-              py: 1,
-              px: 2,
-            }}
-          >
+    <Box className={styles.root}>
+      <Box className={styles.root__textinfo}>
+        <Box className={styles.root__textinfo__title}>
+          <Typography preset="common-1" color="darkgreyed" fontFamily="poppins">
+            {textLabel}
+          </Typography>
+        </Box>
+        <Box className={styles.root__textinfo__valuewr}>
+          <Box className={styles.root__textinfo__valuewr__valuebrdr}>
             <Typography
               preset="price-1"
               color="darkgreyed"
               fontFamily="poppins"
             >
-              {splitZeros(value)}
+              {splitEvery3DigitWithSpace(sliderValue)}
             </Typography>
           </Box>
           <Typography
@@ -72,9 +56,12 @@ const SliderWithInput: React.FC<SliderWithInputProps> = ({
         </Box>
       </Box>
       <Slider
+        className={styles.root__slider}
         sx={{
           '& .MuiSlider-thumb': {
             color: '#ffffff',
+            height: 16,
+            width: 16,
           },
           '& .MuiSlider-track': {
             color: '#333333',
@@ -88,8 +75,8 @@ const SliderWithInput: React.FC<SliderWithInputProps> = ({
             color: 'red',
           },
         }}
-        value={typeof value === 'number' ? value : 0}
-        onChange={handleSliderChange}
+        value={sliderValue}
+        onChange={sliderChangeHandler}
         aria-labelledby="input-slider"
         step={stepValue}
         min={minValue}

@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import styles from './typography.module.css';
+import styles from './typography.module.scss';
 
 type TypographyProps = {
   children: React.ReactNode;

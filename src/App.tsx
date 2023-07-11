@@ -9,7 +9,6 @@ function App() {
         fixed
         disableGutters
         sx={{
-          backgroundColor: 'skyblue',
           maxHeight: '100vh',
           maxWidth: '100vw',
           minWidth: 'calc(100vw - 64px)',

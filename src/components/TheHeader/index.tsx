@@ -21,7 +21,6 @@ const TheHeader = () => {
     <AppBar
       elevation={0}
       sx={{
-        position: 'sticky',
         display: 'flex',
         justifyContent: 'flex-end',
       }}
