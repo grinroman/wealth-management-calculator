@@ -4,9 +4,7 @@
   position: relative;
 
   &__tip {
-    max-width: 186px;
-    min-width: 85px;
-
+    min-width: 100px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -15,28 +13,50 @@
     top: 70%;
     left: 5%;
 
+    @media (max-width: 900px) {
+      left: initial;
+      right: 60%;
+
+      border-radius: 4px;
+
+      align-items: end;
+    }
+
     &__label,
     &__pricing {
-      padding-left: 2px;
+      padding-left: 4px;
     }
 
     &__label {
       border-left: 1px solid #7d7d7d;
 
-      padding-top: 8px;
-      padding-left: 4px;
+      padding-top: 10px;
 
-      width: 100%;
+      width: content-fit;
       min-height: 32px;
 
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+
+      @media (max-width: 900px) {
+        border-left: none;
+        border-right: 1px solid #7d7d7d;
+
+        justify-content: flex-start;
+        align-items: end;
+
+        padding-left: 0;
+        padding-right: 4px;
+      }
     }
 
     &__pricing {
       height: auto;
-      padding-left: 4px;
+
+      @media (max-width: 900px) {
+        padding-right: 4px;
+      }
     }
   }
 }
@@ -50,6 +70,15 @@
 
   flex-direction: column-reverse;
   align-items: end;
+
+  @media (max-width: 900px) {
+    left: initial;
+    right: 50%;
+  }
+}
+
+.labelBottomMiddle {
+  left: 15%;
 }
 
 .labelTop {
@@ -67,4 +96,8 @@
 
 .pricingTop {
   padding-right: 4px;
+}
+
+.isRed {
+  border: 1.6px solid #f28181;
 }

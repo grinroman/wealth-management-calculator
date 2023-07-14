@@ -8,7 +8,13 @@ import { splitEvery3DigitWithSpace } from 'calculations/common/splitEvery3DigitW
 enum Color {
   grey = '#E8E9E9',
   green = '#53B7A1',
-  red = 'red',
+  red = `repeating-linear-gradient(
+    -60deg,
+    #F28181,
+    #F28181 1px,
+    #ffeded 1px,
+    #ffeded 5px
+  );`,
 }
 
 type ChartBarItemProps = {
@@ -17,6 +23,7 @@ type ChartBarItemProps = {
   value: number;
   color: 'grey' | 'green' | 'red';
   ifNeedToGetUp?: boolean;
+  ifNeedToMiddle?: boolean;
 };
 
 export const ChartBarItem: React.FC<ChartBarItemProps> = ({
@@ -25,23 +32,28 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
   value,
   color,
   ifNeedToGetUp,
+  ifNeedToMiddle,
 }) => {
-  console.log('ifNeedToGetUp ', ifNeedToGetUp);
-
   return (
     <Box
       sx={{
         background: Color[color],
         width: `${percentageWidth}%`,
       }}
-      className={styles.root}
+      className={clsx(styles.root, color === 'red' && styles['isRed'])}
     >
       {!!value && (
-        <div className={clsx(styles.root__tip, ifNeedToGetUp && styles.tipTop)}>
+        <div
+          className={clsx(
+            styles.root__tip,
+            ifNeedToGetUp && styles['tipTop'],
+            ifNeedToMiddle && styles['labelBottomMiddle']
+          )}
+        >
           <div
             className={clsx(
               styles.root__tip__label,
-              ifNeedToGetUp && styles.labelTop
+              ifNeedToGetUp && styles['labelTop']
             )}
           >
             <Typography preset="subtitle-2" color="greyed" fontFamily="poppins">
@@ -54,7 +66,7 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
               ifNeedToGetUp && styles.pricingTop
             )}
           >
-            <Typography preset="price-1" color="blacked" fontFamily="poppins">
+            <Typography preset="price-2" color="blacked" fontFamily="poppins">
               € {splitEvery3DigitWithSpace(value)}
             </Typography>
           </div>

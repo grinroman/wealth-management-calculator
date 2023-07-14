@@ -55,6 +55,7 @@ const SliderWithInput: React.FC<SliderWithInputProps> = ({
           </Typography>
         </Box>
       </Box>
+        {/*FIXME: add to scss*/}
       <Slider
         className={styles.root__slider}
         sx={{

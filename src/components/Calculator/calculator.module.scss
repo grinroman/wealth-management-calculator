@@ -1,0 +1,41 @@
+.root {
+  &__title {
+    margin-bottom: 76px;
+    text-align: center;
+
+    @media (max-width: 1100px) {
+      margin-bottom: 32px;
+      text-align: left;
+    }
+  }
+
+  &__subheading {
+    margin-bottom: 8px;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__calculator {
+    height: 100%;
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @media (max-width: 900px) {
+      padding: 20px;
+      gap: 32px;
+    }
+  }
+
+  &__charts {
+    height: 100%;
+    padding: 46px;
+    @media (max-width: 900px) {
+      padding: 24px 12px;
+    }
+  }
+}

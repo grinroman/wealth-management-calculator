@@ -9,6 +9,7 @@ import {
   Box,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
+import styles from './the-header.module.scss';
 
 const TheHeader = () => {
   const [locale, setLocale] = React.useState('Eng');
@@ -20,18 +21,12 @@ const TheHeader = () => {
   return (
     <AppBar
       elevation={0}
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-      }}
+      className={styles.root}
       color="transparent"
       position="static"
     >
-      <Toolbar
-        disableGutters
-        sx={{ display: 'flex', justifyContent: 'flex-end' }}
-      >
-        <FormControl variant="standard" sx={{ maxWidth: 55, float: 'right' }}>
+      <Toolbar disableGutters className={styles.root__toolbar}>
+        <FormControl variant="standard">
           <Select
             id="locale-select-label"
             value={locale}
