@@ -7,6 +7,6 @@ export const getChartValuesInPercentMeasure = (
   overall: number
 ) => ({
   initialCapitalPercent: (MAX_PERCENTAGE * initialCapital) / overall,
-  toalEarningsPercent: (MAX_PERCENTAGE * totalEarnings) / overall,
+  totalEarningsPercent: (MAX_PERCENTAGE * totalEarnings) / overall,
   constsPercent: (MAX_PERCENTAGE * costs) / overall,
 });

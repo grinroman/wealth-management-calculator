@@ -1,3 +1,5 @@
+@import 'src/styles/mixins.scss';
+
 .root {
   height: 32px;
 
@@ -11,11 +13,11 @@
 
     position: absolute;
     top: 70%;
-    left: 5%;
+    left: 30%;
 
     @media (max-width: 900px) {
       left: initial;
-      right: 60%;
+      right: 20%;
 
       border-radius: 4px;
 
@@ -28,7 +30,7 @@
     }
 
     &__label {
-      border-left: 1px solid #7d7d7d;
+      border-left: 1px solid get-color(greyed, base);
 
       padding-top: 10px;
 
@@ -41,7 +43,7 @@
 
       @media (max-width: 900px) {
         border-left: none;
-        border-right: 1px solid #7d7d7d;
+        border-right: 1px solid get-color(greyed, base);
 
         justify-content: flex-start;
         align-items: end;
@@ -58,6 +60,42 @@
         padding-right: 4px;
       }
     }
+  }
+}
+
+.isAsPcTip {
+  @media (max-width: 900px) {
+    top: 70%;
+    left: 10%;
+
+    border-radius: none;
+
+    align-items: initial;
+  }
+}
+
+.isAsPcLabel {
+  @media (max-width: 900px) {
+    border-right: none;
+    border-left: 1px solid get-color(greyed, base);
+
+    padding-top: 10px;
+
+    width: content-fit;
+    min-height: 32px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+
+    padding-left: 4px;
+  }
+}
+
+.isAsPcPricing {
+  @media (max-width: 900px) {
+    padding-right: none;
   }
 }
 
@@ -91,7 +129,7 @@
   align-items: end;
 
   border-left: none;
-  border-right: 1px solid #7d7d7d;
+  border-right: 1px solid get-color(greyed, base);
 }
 
 .pricingTop {
@@ -99,5 +137,8 @@
 }
 
 .isRed {
-  border: 1.6px solid #f28181;
+  border: 1.6px solid get-color(redded, base);
+}
+.isGrey {
+  border: 1.6px solid #e8e9e9;
 }

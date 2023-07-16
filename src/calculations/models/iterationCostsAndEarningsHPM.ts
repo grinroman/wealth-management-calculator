@@ -1,3 +1,5 @@
+import currency from 'currency.js';
+
 import { InputCostsEarningsCalcType } from 'types/InputCostsEarningsCalcType';
 import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
 
@@ -7,21 +9,25 @@ export const iterationCostsAndEarningsHPM = ({
   annualGainExpectation,
   wmAndProductFees,
 }: InputCostsEarningsCalcType): OutputCostsEarningsIterationType => {
-  annualGainExpectation = annualGainExpectation / 100;
-  wmAndProductFees = wmAndProductFees / 100;
+  annualGainExpectation = currency(annualGainExpectation).divide(100).value;
+  wmAndProductFees = currency(wmAndProductFees).divide(100).value;
   let newEarning,
     newCost,
     closingBalance,
-    startingBalance = initialCapital;
+    startingBalance = initialCapital,
+    earningsTotal = 0,
+    costsTotal = 0;
   const costsArr: number[] = [];
   const earningArr: number[] = [];
   const startingBalanceArr: number[] = [];
   const closingBalanceArr: number[] = [];
 
   for (let year = 1; year <= investmentDuration; year++) {
-    startingBalanceArr.push(startingBalance);
+    startingBalanceArr.push(Math.round(startingBalance));
     if (year <= investmentDuration) {
-      newEarning = Math.round(annualGainExpectation * startingBalance);
+      newEarning = currency(annualGainExpectation).multiply(
+        startingBalance
+      ).value;
       if (year === 1) {
         newCost = -5000;
       } else if (year % 10 === 0) {
@@ -36,21 +42,30 @@ export const iterationCostsAndEarningsHPM = ({
       newCost = 0;
     }
     if (year === 1) {
-      closingBalance = startingBalance + newEarning + newCost;
+      closingBalance = currency(startingBalance)
+        .add(newEarning)
+        .add(newCost).value;
     } else {
-      closingBalance = startingBalance + newEarning;
+      closingBalance = currency(startingBalance).add(newEarning).value;
     }
     startingBalance = closingBalance;
-    costsArr.push(newCost);
-    earningArr.push(newEarning);
-    closingBalanceArr.push(closingBalance);
+    costsArr.push(Math.round(newCost));
+    earningArr.push(Math.round(newEarning));
+    closingBalanceArr.push(Math.round(closingBalance));
+
+    earningsTotal = currency(earningsTotal).add(newEarning).value;
+    costsTotal = currency(costsTotal).add(newCost).value;
   }
 
+  earningsTotal = Math.round(earningsTotal);
+  costsTotal = Math.round(costsTotal);
 
   return {
     startingBalanceArr,
     earningArr,
     costsArr,
     closingBalanceArr,
+    earningsTotal,
+    costsTotal,
   };
 };

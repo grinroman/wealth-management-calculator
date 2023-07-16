@@ -5,12 +5,20 @@
  */
 
 export const splitEvery3DigitWithSpace = (numberToSplit: number): string => {
-  if (numberToSplit < 1000) {
+  if (Math.abs(numberToSplit) < 1000) {
     return String(numberToSplit);
   }
-  const numberStr = String(numberToSplit);
-  const parts = numberStr.split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  const result = parts.join(' ');
+  let numberToSplitStr = String(numberToSplit);
+  let result = '';
+  let digitCount = 0;
+  for (var i = numberToSplitStr.length - 1; i >= 0; i--) {
+    result = numberToSplitStr[i] + result;
+    digitCount++;
+    if (digitCount === 3 && i !== 0) {
+      result = ' ' + result;
+      digitCount = 0;
+    }
+  }
+
   return result;
 };

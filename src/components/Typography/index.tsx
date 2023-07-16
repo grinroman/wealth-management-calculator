@@ -12,8 +12,9 @@ type TypographyProps = {
     | 'subtitle-2'
     | 'price-1'
     | 'price-2'
+    | 'price-3'
     | 'common-1';
-  color: 'blacked' | 'darkgreyed' | 'greyed' | 'blued';
+  color: 'blacked' | 'darkgreyed' | 'greyed' | 'blued' | 'greened' | 'redded';
   align?: 'center' | 'left' | 'right';
   fontFamily: 'poppins' | 'object-sants';
   isUnderlined?: boolean;

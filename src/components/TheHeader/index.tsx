@@ -25,7 +25,7 @@ const TheHeader = () => {
       color="transparent"
       position="static"
     >
-      <Toolbar disableGutters className={styles.root__toolbar}>
+      <Toolbar className={styles.root__toolbar}>
         <FormControl variant="standard">
           <Select
             id="locale-select-label"

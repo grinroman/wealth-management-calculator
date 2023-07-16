@@ -5,12 +5,6 @@ import Typography from 'components/Typography';
 import SliderWithInput from 'components/SliderWithInput';
 import ChartComponent from '../ChartComponent';
 
-import { costsWMM } from 'calculations/wealth-managemant-model/costsWMM';
-import { earningsWMM } from 'calculations/wealth-managemant-model/earningsWMM';
-import { roundUpToWholePart } from 'calculations/common/roundUpToWholePart';
-import { costsNoCostModel } from 'calculations/no-cost-model/costsNCM';
-import { earningsNoCostModel } from 'calculations/no-cost-model/earningsNCM';
-
 import {
   INITIAL_CAPITAL_DEFAULT,
   INITIAL_CAPITAL_MIN,
@@ -30,7 +24,10 @@ import {
   W_M_AND_PROD_FEES_STEP,
 } from 'constants/calculatorConstants';
 import styles from './calculator.module.scss';
-import { iterationCostsAndEarningsHPM } from 'calculations/hourly-priced-model/iterationCostsAndEarningsHPM';
+import { iterationCostsAndEarningsHPM } from 'calculations/models/iterationCostsAndEarningsHPM';
+import { iterationCostsAndEarningsWMM } from 'calculations/models/iterationCostsAndEarningsWMM';
+import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
+import { iterationCostsAndEarningsNCM } from 'calculations/models/iterationCostsAndEarningsNCM';
 
 const Calculator: React.FC = () => {
   //states of calculator
@@ -47,43 +44,35 @@ const Calculator: React.FC = () => {
     W_M_AND_PROD_FEES_DEFAULT
   );
   //states of model values
-  const [costsArrHPM, setCostsHPM] = useState<number>(0);
-  const [earningsHPM, setEarningsHPM] = useState<number>(0);
+  const [stateHPM, setStateHPM] =
+    useState<OutputCostsEarningsIterationType | null>(null);
+  const [stateWMM, setStateWMM] =
+    useState<OutputCostsEarningsIterationType | null>(null);
+  const [stateNCM, setStateNCM] =
+    useState<OutputCostsEarningsIterationType | null>(null);
 
   useEffect(() => {
-    const { earningArr: earningArrHPM, costsArr: costsArrHPM } =
-      iterationCostsAndEarningsHPM({
-        initialCapital,
-        investmentDuration,
-        annualGainExpectation,
-        wmAndProductFees,
-      });
-    const totalCostsHPM = -costsArrHPM.reduce((acc, el) => {
-      return acc + el;
-    });
-    setCostsHPM(totalCostsHPM);
-    const totalEarningsHPM = earningArrHPM.reduce((acc, el) => {
-      return acc + el;
-    });
-    setEarningsHPM(totalEarningsHPM);
+    const inputCalcObj = {
+      initialCapital,
+      investmentDuration,
+      annualGainExpectation,
+      wmAndProductFees,
+    };
+    setStateHPM(iterationCostsAndEarningsHPM(inputCalcObj));
+    setStateWMM(iterationCostsAndEarningsWMM(inputCalcObj));
+    setStateNCM(iterationCostsAndEarningsNCM(inputCalcObj));
   }, []);
 
   useEffect(() => {
-    const { earningArr: earningArrHPM, costsArr: costsArrHPM } =
-      iterationCostsAndEarningsHPM({
-        initialCapital,
-        investmentDuration,
-        annualGainExpectation,
-        wmAndProductFees,
-      });
-    const totalCostsHPM = -costsArrHPM.reduce((acc, el) => {
-      return acc + el;
-    });
-    setCostsHPM(totalCostsHPM);
-    const totalEarningsHPM = earningArrHPM.reduce((acc, el) => {
-      return acc + el;
-    });
-    setEarningsHPM(totalEarningsHPM);
+    const inputCalcObj = {
+      initialCapital,
+      investmentDuration,
+      annualGainExpectation,
+      wmAndProductFees,
+    };
+    setStateHPM(iterationCostsAndEarningsHPM(inputCalcObj));
+    setStateWMM(iterationCostsAndEarningsWMM(inputCalcObj));
+    setStateNCM(iterationCostsAndEarningsNCM(inputCalcObj));
   }, [
     initialCapital,
     investmentDuration,
@@ -163,48 +152,27 @@ const Calculator: React.FC = () => {
             </Typography>
           </Box>
           <Paper className={styles.root__charts}>
-            {/*wealth management model */}
-            <ChartComponent
-              label="Wealth management model"
-              initialCapital={initialCapital}
-              totalEarnings={roundUpToWholePart(
-                earningsWMM({
-                  initialCapital,
-                  investmentDuration,
-                  annualGainExpectation,
-                  wmAndProductFees,
-                })
-              )}
-              costs={roundUpToWholePart(
-                costsWMM({
-                  initialCapital,
-                  investmentDuration,
-                  annualGainExpectation,
-                  wmAndProductFees,
-                })
-              )}
-            />
-            {/*hourly priced model*/}
-            <ChartComponent
-              label="Hourly priced model"
-              initialCapital={initialCapital}
-              totalEarnings={earningsHPM}
-              costs={costsArrHPM}
-            />
-            {/*no cost model*/}
-            <ChartComponent
-              label="No cost model"
-              initialCapital={initialCapital}
-              totalEarnings={roundUpToWholePart(
-                earningsNoCostModel({
-                  initialCapital,
-                  investmentDuration,
-                  annualGainExpectation,
-                  wmAndProductFees,
-                })
-              )}
-              costs={costsNoCostModel()}
-            />
+            {stateWMM && (
+              <ChartComponent
+                label="Wealth management model"
+                initialCapital={initialCapital}
+                chartInfo={stateWMM}
+              />
+            )}
+            {stateHPM && (
+              <ChartComponent
+                label="Hourly priced model"
+                initialCapital={initialCapital}
+                chartInfo={stateHPM}
+              />
+            )}
+            {stateNCM && (
+              <ChartComponent
+                label="No cost model"
+                initialCapital={initialCapital}
+                chartInfo={stateNCM}
+              />
+            )}
           </Paper>
         </Grid>
       </Grid>

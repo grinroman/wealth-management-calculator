@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Box, Stack, Paper, styled } from '@mui/material';
 import { roundUpToWholePart } from 'calculations/common/roundUpToWholePart';
@@ -10,43 +10,64 @@ import { getChartValuesInPercentMeasure } from 'calculations/common/getChartValu
 import Typography from 'components/Typography';
 import styles from './chart-component.module.scss';
 import { ChartBarItem } from './partials/ChartBarItem';
+import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
 
 type ChartComponentProps = {
   label: string;
   initialCapital: number;
-  totalEarnings: number;
-  costs: number;
+  chartInfo: OutputCostsEarningsIterationType;
 };
 
 const ChartComponent: React.FC<ChartComponentProps> = ({
   label,
   initialCapital,
-  totalEarnings,
-  costs,
+  chartInfo,
 }) => {
-  const total = initialCapital + totalEarnings + costs;
-  const { initialCapitalPercent, toalEarningsPercent, constsPercent } =
-    getChartValuesInPercentMeasure(initialCapital, totalEarnings, costs, total);
+  const {
+    startingBalanceArr,
+    earningArr,
+    costsArr,
+    closingBalanceArr,
+    earningsTotal,
+    costsTotal,
+  } = chartInfo;
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const total = initialCapital + earningsTotal - costsTotal;
+  const { initialCapitalPercent, totalEarningsPercent, constsPercent } =
+    getChartValuesInPercentMeasure(
+      initialCapital,
+      earningsTotal,
+      -costsTotal,
+      total
+    );
+
+  const [open, setOpen] = useState(false);
+  const openModalHandler = () => setOpen(true);
+  const closeModalHandler = () => setOpen(false);
 
   return (
     <Box className={styles.root}>
-      <ModalDetailedView handleClose={handleClose} isOpen={open} />
+      <ModalDetailedView
+        title={label}
+        handleClose={closeModalHandler}
+        isOpen={open}
+        startingBalanceArr={startingBalanceArr}
+        earningArr={earningArr}
+        costsArr={costsArr}
+        closingBalanceArr={closingBalanceArr}
+      />
       <Box className={styles.root__heading}>
         <Typography preset="common-1" color="darkgreyed" fontFamily="poppins">
           {label}
         </Typography>
-        <button onClick={handleOpen}>
+        <button onClick={openModalHandler}>
           <Typography
             preset="common-1"
             color="blued"
             fontFamily="poppins"
             isUnderlined
           >
-            View
+            View details
           </Typography>
         </button>
       </Box>
@@ -57,16 +78,17 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             label="Investment"
             value={initialCapital}
             color="grey"
+            isAsPc
           />
         ) : null}
 
-        {toalEarningsPercent ? (
+        {totalEarningsPercent ? (
           <ChartBarItem
-            percentageWidth={toalEarningsPercent}
+            percentageWidth={totalEarningsPercent}
             label="Total earnings"
-            value={totalEarnings}
+            value={earningsTotal}
             color="green"
-            ifNeedToMiddle={toalEarningsPercent - initialCapitalPercent >= 15}
+            ifNeedToMiddle={totalEarningsPercent - initialCapitalPercent >= 20}
           />
         ) : null}
 
@@ -74,9 +96,9 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
           <ChartBarItem
             percentageWidth={constsPercent}
             label="Costs"
-            value={costs}
+            value={-costsTotal}
             color="red"
-            ifNeedToGetUp={toalEarningsPercent - constsPercent <= 15}
+            ifNeedToGetUp={totalEarningsPercent - constsPercent <= 20}
           />
         ) : null}
       </Stack>

@@ -24,6 +24,7 @@ type ChartBarItemProps = {
   color: 'grey' | 'green' | 'red';
   ifNeedToGetUp?: boolean;
   ifNeedToMiddle?: boolean;
+  isAsPc?: boolean;
 };
 
 export const ChartBarItem: React.FC<ChartBarItemProps> = ({
@@ -33,6 +34,7 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
   color,
   ifNeedToGetUp,
   ifNeedToMiddle,
+  isAsPc,
 }) => {
   return (
     <Box
@@ -40,12 +42,17 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
         background: Color[color],
         width: `${percentageWidth}%`,
       }}
-      className={clsx(styles.root, color === 'red' && styles['isRed'])}
+      className={clsx(
+        styles.root,
+        color === 'red' && styles['isRed'],
+        color === 'grey' && styles['isGrey']
+      )}
     >
       {!!value && (
         <div
           className={clsx(
             styles.root__tip,
+            isAsPc && styles['isAsPcTip'],
             ifNeedToGetUp && styles['tipTop'],
             ifNeedToMiddle && styles['labelBottomMiddle']
           )}
@@ -53,7 +60,8 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
           <div
             className={clsx(
               styles.root__tip__label,
-              ifNeedToGetUp && styles['labelTop']
+              ifNeedToGetUp && styles['labelTop'],
+              isAsPc && styles['isAsPcLabel']
             )}
           >
             <Typography preset="subtitle-2" color="greyed" fontFamily="poppins">
@@ -63,7 +71,8 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
           <div
             className={clsx(
               styles.root__tip__pricing,
-              ifNeedToGetUp && styles.pricingTop
+              ifNeedToGetUp && styles['pricingTop'],
+              isAsPc && styles['isAsPcPricing']
             )}
           >
             <Typography preset="price-2" color="blacked" fontFamily="poppins">
