@@ -1,21 +1,26 @@
-import React from 'react';
-import {
-  AppBar,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Toolbar,
-  Box,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { AppBar, FormControl, Select, MenuItem, Toolbar } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
+
+import { useTranslation, Trans } from 'react-i18next';
+
 import styles from './the-header.module.scss';
+import i18n from 'i18';
+
+const lngs: Record<string, string> = {
+  en: 'en',
+  ax: 'ax',
+};
 
 const TheHeader = () => {
-  const [locale, setLocale] = React.useState('Eng');
+  const [locale, setLocale] = useState<string>('en');
 
   const localeChangeHandler = (event: SelectChangeEvent) => {
     setLocale(event.target.value);
+    i18n.changeLanguage(event.target.value);
+
+    // console.log('locale ', event.target.value);
+    // i18n.changeLanguage(event.target.value);
   };
 
   return (
@@ -29,12 +34,16 @@ const TheHeader = () => {
         <FormControl variant="standard">
           <Select
             id="locale-select-label"
-            value={locale}
+            value={lngs[locale]}
             onChange={localeChangeHandler}
+            defaultValue={lngs[locale]}
             disableUnderline
           >
-            <MenuItem value={'Eng'}>Eng</MenuItem>
-            <MenuItem value={'Ukr'}>Ukr</MenuItem>
+            {Object.keys(lngs).map((lng: string) => (
+              <MenuItem key={lng} value={lng}>
+                {lngs[lng]}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Toolbar>

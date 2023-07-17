@@ -23,11 +23,15 @@ import {
   W_M_AND_PROD_FEES_MAX,
   W_M_AND_PROD_FEES_STEP,
 } from 'constants/calculatorConstants';
-import styles from './calculator.module.scss';
+
 import { iterationCostsAndEarningsHPM } from 'calculations/models/iterationCostsAndEarningsHPM';
 import { iterationCostsAndEarningsWMM } from 'calculations/models/iterationCostsAndEarningsWMM';
 import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
 import { iterationCostsAndEarningsNCM } from 'calculations/models/iterationCostsAndEarningsNCM';
+
+import { useTranslation} from 'react-i18next';
+
+import styles from './calculator.module.scss';
 
 const Calculator: React.FC = () => {
   //states of calculator
@@ -80,6 +84,8 @@ const Calculator: React.FC = () => {
     wmAndProductFees,
   ]);
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Typography
@@ -89,7 +95,7 @@ const Calculator: React.FC = () => {
         component="h1"
         className={styles.root__title}
       >
-        Wealth management cost calculator
+        {t('title')}
       </Typography>
       <Grid container columnSpacing={2} rowSpacing={5}>
         <Grid item xs={12} md={4}>
@@ -99,7 +105,7 @@ const Calculator: React.FC = () => {
               color="blacked"
               fontFamily="poppins"
             >
-              Data for calculate
+             {t('calculator.header')}
             </Typography>
           </Box>
           <Paper className={styles.root__calculator}>

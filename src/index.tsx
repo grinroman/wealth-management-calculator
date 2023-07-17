@@ -6,6 +6,8 @@ import App from './App';
 import 'styles/_reset.scss';
 import 'styles/_index.scss';
 
+import './i18';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
