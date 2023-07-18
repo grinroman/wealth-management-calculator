@@ -8,20 +8,21 @@ import { splitEvery3DigitWithSpace } from 'calculations/common/splitEvery3DigitW
 enum Color {
   grey = '#E8E9E9',
   green = '#53B7A1',
-  red = `repeating-linear-gradient(
+  red1 = `repeating-linear-gradient(
     -60deg,
     #F28181,
     #F28181 1px,
     #ffeded 1px,
     #ffeded 5px
   );`,
+  red2 = '#ffeded',
 }
 
 type ChartBarItemProps = {
   percentageWidth: number;
   label: string;
   value: number;
-  color: 'grey' | 'green' | 'red';
+  color: 'grey' | 'green' | 'red1' | 'red2';
   ifNeedToGetUp?: boolean;
   ifNeedToMiddle?: boolean;
   isAsPc?: boolean;
@@ -44,7 +45,7 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
       }}
       className={clsx(
         styles.root,
-        color === 'red' && styles['isRed'],
+        (color === 'red1' || color === 'red2') && styles['isRed'],
         color === 'grey' && styles['isGrey']
       )}
     >

@@ -37,21 +37,39 @@ i18n
               investment:"Investment",
               totalEarnings:"Total Earnings",
               costs:"Costs",
-              compoundInterest:"Costs due to missing out on compound interest"
+              compoundInterest:"Opportunity cost"
             }
           }
         },
       },
       ax: {
         translation: {
-          h1: 'Varainhoidon kustannuslaskuri',
+          title: 'Wealth management cost calculator',
           calculator: {
-            header: 'Tiedot laskemista varten',
-            initial: 'Alkupääoma',
-            investment: 'Sijoituksen kesto',
-            annual: 'Vuotuinen voitto-odotus',
-            fees: 'Varallisuudenhoito ja tuotemaksut',
+            heading: 'Data for calculate',
+            paramas: {
+              initial: 'Initial capital',
+              investment: 'Investment duration',
+              annual: 'Annual gain expectation',
+              fees: 'Wealth management & product fees',
+              years: 'years',
+            },
           },
+          outputs:{
+            heading:"Impact on wealth management fees on total gains",
+            details:"View details",
+            models:{
+              wmm:"Wealth management model", 
+              hpm:"Hourly priced model",
+              ncm:"No cost model",
+            },
+            bars:{
+              investment:"Investment",
+              totalEarnings:"Total Earnings",
+              costs:"Costs",
+              compoundInterest:"Opportunity cost"
+            }
+          }
         },
       },
     },

@@ -15,7 +15,7 @@ import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsItera
 type ChartComponentProps = {
   label: string;
   initialCapital: number;
-  chartInfo: OutputCostsEarningsIterationType;
+  chartInfo: OutputCostsEarningsIterationType & { opportynityCosts?: number };
 };
 
 const ChartComponent: React.FC<ChartComponentProps> = ({
@@ -30,16 +30,29 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
     closingBalanceArr,
     earningsTotal,
     costsTotal,
+    opportynityCosts,
   } = chartInfo;
 
-  const total = initialCapital + earningsTotal - costsTotal;
-  const { initialCapitalPercent, totalEarningsPercent, constsPercent } =
-    getChartValuesInPercentMeasure(
-      initialCapital,
-      earningsTotal,
-      -costsTotal,
-      total
-    );
+  const total =
+    initialCapital +
+    earningsTotal -
+    costsTotal +
+    (opportynityCosts === undefined ? 0 : opportynityCosts);
+
+  const {
+    initialCapitalPercent,
+    totalEarningsPercent,
+    constsPercent,
+    oportynityCostsPercent,
+  } = getChartValuesInPercentMeasure(
+    initialCapital,
+    earningsTotal,
+    -costsTotal,
+    total,
+    opportynityCosts
+  );
+
+  // console.log('oportynityCostsPercent ', oportynityCostsPercent);
 
   const [open, setOpen] = useState(false);
   const openModalHandler = () => setOpen(true);
@@ -97,8 +110,18 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             percentageWidth={constsPercent}
             label="Costs"
             value={-costsTotal}
-            color="red"
+            color="red1"
             ifNeedToGetUp={totalEarningsPercent - constsPercent <= 20}
+          />
+        ) : null}
+
+        {oportynityCostsPercent && opportynityCosts ? (
+          <ChartBarItem
+            percentageWidth={oportynityCostsPercent}
+            label="Opportunity cost"
+            value={opportynityCosts}
+            color="red2"
+            ifNeedToGetUp={true}
           />
         ) : null}
       </Stack>

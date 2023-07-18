@@ -8,7 +8,12 @@ export const iterationCostsAndEarningsWMM = ({
   investmentDuration,
   annualGainExpectation,
   wmAndProductFees,
-}: InputCostsEarningsCalcType): OutputCostsEarningsIterationType => {
+  earningsNCM,
+}: InputCostsEarningsCalcType & {
+  earningsNCM: number;
+}): OutputCostsEarningsIterationType & {
+  opportynityCosts: number;
+} => {
   annualGainExpectation = currency(annualGainExpectation).divide(100).value;
   wmAndProductFees = currency(wmAndProductFees).divide(100).value;
   let newEarning,
@@ -47,8 +52,21 @@ export const iterationCostsAndEarningsWMM = ({
     earningsTotal = currency(earningsTotal).add(newEarning).value;
     costsTotal = currency(costsTotal).add(newCost).value;
   }
-  earningsTotal = Math.round(earningsTotal);
+  earningsTotal = currency(closingBalanceArr[investmentDuration - 1]).subtract(
+    initialCapital
+  ).value;
   costsTotal = Math.round(costsTotal);
+
+  console.log('earningsNCM ', earningsNCM);
+  console.log('earningsTotal ', earningsTotal);
+  console.log('costsTotal ', costsTotal);
+
+  const opportynityCosts =
+    earningsTotal + costsTotal < earningsNCM
+      ? currency(earningsNCM).subtract(earningsTotal).subtract(-costsTotal).value
+      : 0;
+
+  // console.log('opportynityCosts ', opportynityCosts);
 
   return {
     startingBalanceArr,
@@ -57,5 +75,6 @@ export const iterationCostsAndEarningsWMM = ({
     closingBalanceArr,
     earningsTotal,
     costsTotal,
+    opportynityCosts,
   };
 };

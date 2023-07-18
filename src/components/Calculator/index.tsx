@@ -29,7 +29,7 @@ import { iterationCostsAndEarningsWMM } from 'calculations/models/iterationCosts
 import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
 import { iterationCostsAndEarningsNCM } from 'calculations/models/iterationCostsAndEarningsNCM';
 
-import { useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import styles from './calculator.module.scss';
 
@@ -50,33 +50,46 @@ const Calculator: React.FC = () => {
   //states of model values
   const [stateHPM, setStateHPM] =
     useState<OutputCostsEarningsIterationType | null>(null);
-  const [stateWMM, setStateWMM] =
-    useState<OutputCostsEarningsIterationType | null>(null);
+  const [stateWMM, setStateWMM] = useState<
+    (OutputCostsEarningsIterationType & { opportynityCosts: number }) | null
+  >(null);
   const [stateNCM, setStateNCM] =
     useState<OutputCostsEarningsIterationType | null>(null);
 
   useEffect(() => {
-    const inputCalcObj = {
+    let inputCalcObj = {
       initialCapital,
       investmentDuration,
       annualGainExpectation,
       wmAndProductFees,
     };
+    const currentStateNCM = iterationCostsAndEarningsNCM(inputCalcObj);
+    const earningsNCM = currentStateNCM?.earningsTotal;
+    setStateNCM(currentStateNCM);
+    console.log('costsNCM ', earningsNCM);
     setStateHPM(iterationCostsAndEarningsHPM(inputCalcObj));
-    setStateWMM(iterationCostsAndEarningsWMM(inputCalcObj));
-    setStateNCM(iterationCostsAndEarningsNCM(inputCalcObj));
+    const wmmCalcObj = Object.assign(inputCalcObj, {
+      earningsNCM: earningsNCM as number,
+    });
+    setStateWMM(iterationCostsAndEarningsWMM(wmmCalcObj));
   }, []);
 
   useEffect(() => {
-    const inputCalcObj = {
+    let inputCalcObj = {
       initialCapital,
       investmentDuration,
       annualGainExpectation,
       wmAndProductFees,
     };
+    const currentStateNCM = iterationCostsAndEarningsNCM(inputCalcObj);
+    const earningsNCM = currentStateNCM?.earningsTotal;
+    setStateNCM(currentStateNCM);
+    console.log('costsNCM ', earningsNCM);
     setStateHPM(iterationCostsAndEarningsHPM(inputCalcObj));
-    setStateWMM(iterationCostsAndEarningsWMM(inputCalcObj));
-    setStateNCM(iterationCostsAndEarningsNCM(inputCalcObj));
+    const wmmCalcObj = Object.assign(inputCalcObj, {
+      earningsNCM: earningsNCM as number,
+    });
+    setStateWMM(iterationCostsAndEarningsWMM(wmmCalcObj));
   }, [
     initialCapital,
     investmentDuration,
@@ -105,7 +118,7 @@ const Calculator: React.FC = () => {
               color="blacked"
               fontFamily="poppins"
             >
-             {t('calculator.header')}
+              {t('calculator.header')}
             </Typography>
           </Box>
           <Paper className={styles.root__calculator}>
