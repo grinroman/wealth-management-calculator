@@ -7,6 +7,7 @@
 
   &__tip {
     min-width: 100px;
+    max-width: 150px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -116,8 +117,24 @@
   }
 }
 
+// .tipTopRight {
+//   min-width: 140px;
+//   gap: 2px;
+
+//   top: -150%;
+//   left: 20%;
+
+//   flex-direction: column-reverse;
+//   align-items: end;
+
+//   @media (max-width: 900px) {
+//     left: initial;
+//     right: 50%;
+//   }
+// }
+
 .labelBottomMiddle {
-  left: 15%;
+  left: 50%;
 }
 
 .labelTop {
@@ -137,9 +154,14 @@
   padding-right: 4px;
 }
 
-.isRed {
+.isRed1 {
   border: 1.6px solid get-color(redded, base);
 }
+
+.isRed2 {
+  border: 1.6px solid get-color(redded, secondary);
+}
+
 .isGrey {
   border: 1.6px solid #e8e9e9;
 }

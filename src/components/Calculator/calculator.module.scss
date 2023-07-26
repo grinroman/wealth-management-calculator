@@ -33,7 +33,8 @@
 
   &__charts {
     height: 470px;
-    padding: 46px;
+    padding: 46px 46px 46px 20px;
+
     @media (max-width: 900px) {
       padding: 24px 12px;
     }

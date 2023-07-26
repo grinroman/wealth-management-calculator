@@ -66,8 +66,12 @@ const Calculator: React.FC = () => {
     const currentStateNCM = iterationCostsAndEarningsNCM(inputCalcObj);
     const earningsNCM = currentStateNCM?.earningsTotal;
     setStateNCM(currentStateNCM);
-    console.log('costsNCM ', earningsNCM);
-    setStateHPM(iterationCostsAndEarningsHPM(inputCalcObj));
+
+    const hpmCalcObj = Object.assign(inputCalcObj, {
+      earningsNCM: earningsNCM as number,
+    });
+    setStateHPM(iterationCostsAndEarningsHPM(hpmCalcObj));
+
     const wmmCalcObj = Object.assign(inputCalcObj, {
       earningsNCM: earningsNCM as number,
     });
@@ -84,8 +88,12 @@ const Calculator: React.FC = () => {
     const currentStateNCM = iterationCostsAndEarningsNCM(inputCalcObj);
     const earningsNCM = currentStateNCM?.earningsTotal;
     setStateNCM(currentStateNCM);
-    console.log('costsNCM ', earningsNCM);
-    setStateHPM(iterationCostsAndEarningsHPM(inputCalcObj));
+
+    const hpmCalcObj = Object.assign(inputCalcObj, {
+      earningsNCM: earningsNCM as number,
+    });
+    setStateHPM(iterationCostsAndEarningsHPM(hpmCalcObj));
+
     const wmmCalcObj = Object.assign(inputCalcObj, {
       earningsNCM: earningsNCM as number,
     });
@@ -118,7 +126,7 @@ const Calculator: React.FC = () => {
               color="blacked"
               fontFamily="poppins"
             >
-              {t('calculator.header')}
+              {t('calculator.heading')}
             </Typography>
           </Box>
           <Paper className={styles.root__calculator}>
@@ -126,7 +134,7 @@ const Calculator: React.FC = () => {
               minValue={INITIAL_CAPITAL_MIN}
               maxValue={INITIAL_CAPITAL_MAX}
               stepValue={INITIAL_CAPITAL_STEP}
-              textLabel="Initial capital"
+              textLabel={t('calculator.paramas.initial')}
               measureTextLabel="€"
               sliderValue={initialCapital}
               setSliderValue={setInitialCapital}
@@ -135,8 +143,8 @@ const Calculator: React.FC = () => {
               minValue={INVESTMENT_DURATION_MIN}
               maxValue={INVESTMENT_DURATIN_MAX}
               stepValue={INVESTMENT_DURATION_STEP}
-              textLabel="Investment duration"
-              measureTextLabel="years"
+              textLabel={t('calculator.paramas.investment')}
+              measureTextLabel={t('calculator.paramas.years')}
               sliderValue={investmentDuration}
               setSliderValue={setInvestmentDuration}
             />
@@ -144,7 +152,7 @@ const Calculator: React.FC = () => {
               minValue={ANNUAL_GAIN_EXPECTATION_MIN}
               maxValue={ANNUAL_GAIN_EXPECTATION_MAX}
               stepValue={ANNUAL_GAIN_EXPECTATION_STEP}
-              textLabel="Annual gain expectation"
+              textLabel={t('calculator.paramas.annual')}
               measureTextLabel="%"
               sliderValue={annualGainExpectation}
               setSliderValue={setAnnualGainExpectation}
@@ -153,7 +161,7 @@ const Calculator: React.FC = () => {
               minValue={W_M_AND_PROD_FEES_MIN}
               maxValue={W_M_AND_PROD_FEES_MAX}
               stepValue={W_M_AND_PROD_FEES_STEP}
-              textLabel="Wealth management & product fees"
+              textLabel={t('calculator.paramas.fees')}
               measureTextLabel="%"
               sliderValue={wmAndProductFees}
               setSliderValue={setWmAndProductFees}
@@ -167,27 +175,27 @@ const Calculator: React.FC = () => {
               color="blacked"
               fontFamily="poppins"
             >
-              Impact on wealth management fees on total gains
+              {t('outputs.heading')}
             </Typography>
           </Box>
           <Paper className={styles.root__charts}>
             {stateWMM && (
               <ChartComponent
-                label="Wealth management model"
+                label={t('outputs.models.wmm')}
                 initialCapital={initialCapital}
                 chartInfo={stateWMM}
               />
             )}
             {stateHPM && (
               <ChartComponent
-                label="Hourly priced model"
+                label={t('outputs.models.hpm')}
                 initialCapital={initialCapital}
                 chartInfo={stateHPM}
               />
             )}
             {stateNCM && (
               <ChartComponent
-                label="No cost model"
+                label={t('outputs.models.ncm')}
                 initialCapital={initialCapital}
                 chartInfo={stateNCM}
               />

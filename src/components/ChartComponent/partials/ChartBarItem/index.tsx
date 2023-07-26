@@ -26,6 +26,7 @@ type ChartBarItemProps = {
   ifNeedToGetUp?: boolean;
   ifNeedToMiddle?: boolean;
   isAsPc?: boolean;
+  ifNeedToGetUpAndReverse?:boolean;
 };
 
 export const ChartBarItem: React.FC<ChartBarItemProps> = ({
@@ -36,6 +37,7 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
   ifNeedToGetUp,
   ifNeedToMiddle,
   isAsPc,
+  ifNeedToGetUpAndReverse
 }) => {
   return (
     <Box
@@ -45,7 +47,8 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
       }}
       className={clsx(
         styles.root,
-        (color === 'red1' || color === 'red2') && styles['isRed'],
+        color === 'red1' && styles['isRed1'],
+        color === 'red2' && styles['isRed2'],
         color === 'grey' && styles['isGrey']
       )}
     >
@@ -55,7 +58,8 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
             styles.root__tip,
             isAsPc && styles['isAsPcTip'],
             ifNeedToGetUp && styles['tipTop'],
-            ifNeedToMiddle && styles['labelBottomMiddle']
+            ifNeedToMiddle && styles['labelBottomMiddle'],
+            // ifNeedToGetUpAndReverse && styles['tipTopRight']
           )}
         >
           <div

@@ -17,6 +17,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import styles from './modal-detailed-view.module.scss';
 import Typography from 'components/Typography';
 import { splitEvery3DigitWithSpace } from 'calculations/common/splitEvery3DigitWithSpace';
+import { useTranslation } from 'react-i18next';
 
 type ModalDetailedViewProps = {
   title: string;
@@ -49,6 +50,8 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
       closingBalanceIteration: closingBalanceArr[i],
     });
   }
+
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -92,7 +95,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     fontFamily="poppins"
                     className={styles.root__modalTable__headerBordered}
                   >
-                    Years
+                    {t('modal.years')}&nbsp;
                   </Typography>
                 </TableCell>
                 <TableCell align="left">
@@ -102,7 +105,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     fontFamily="poppins"
                     className={styles.root__modalTable__headerBordered}
                   >
-                    Starting balance
+                    Starting balance&nbsp;
                   </Typography>
                 </TableCell>
                 <TableCell align="left">
@@ -112,7 +115,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     fontFamily="poppins"
                     className={styles.root__modalTable__headerBordered}
                   >
-                    Earnigns
+                    {t('modal.earnings')}&nbsp;
                   </Typography>
                 </TableCell>
                 <TableCell align="left">
@@ -122,7 +125,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     fontFamily="poppins"
                     className={styles.root__modalTable__headerBordered}
                   >
-                    Cost
+                    {t('modal.costs')}&nbsp;
                   </Typography>
                 </TableCell>
                 <TableCell align="left">
@@ -131,7 +134,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     color="greyed"
                     fontFamily="poppins"
                   >
-                    Closing Balance
+                    {t('modal.closingBalance')}&nbsp;
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -145,7 +148,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                   <TableCell
                     component="th"
                     scope="row"
-                    sx={{ borderRadius: '10px 0 0 10px' }}
+                    // sx={{ borderRadius: '10px 0 0 10px' }}
                   >
                     <Typography
                       preset="price-3"
@@ -184,7 +187,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRadius: '0 10px 10px 0' }}
+                    // sx={{ borderRadius: '0 10px 10px 0' }}
                   >
                     <Typography
                       preset="price-3"

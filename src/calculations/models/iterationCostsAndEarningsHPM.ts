@@ -8,7 +8,12 @@ export const iterationCostsAndEarningsHPM = ({
   investmentDuration,
   annualGainExpectation,
   wmAndProductFees,
-}: InputCostsEarningsCalcType): OutputCostsEarningsIterationType => {
+  earningsNCM,
+}: InputCostsEarningsCalcType & {
+  earningsNCM: number;
+}): OutputCostsEarningsIterationType & {
+  opportynityCosts: number;
+} => {
   annualGainExpectation = currency(annualGainExpectation).divide(100).value;
   wmAndProductFees = currency(wmAndProductFees).divide(100).value;
   let newEarning,
@@ -57,8 +62,21 @@ export const iterationCostsAndEarningsHPM = ({
     costsTotal = currency(costsTotal).add(newCost).value;
   }
 
-  earningsTotal = Math.round(earningsTotal);
+  earningsTotal = currency(closingBalanceArr[investmentDuration - 1]).subtract(
+    initialCapital
+  ).value;
   costsTotal = Math.round(costsTotal);
+
+  const opportynityCosts =
+    earningsTotal - costsTotal < earningsNCM
+      ? currency(earningsNCM).subtract(earningsTotal).subtract(-costsTotal)
+          .value
+      : 0;
+
+  console.log('earningsNCM - hpm ', earningsNCM);
+  console.log('earningsTotal -hpm ', earningsTotal);
+  console.log('costsTotal - hpm', costsTotal);
+  console.log('opportynityCosts - hpm', opportynityCosts);
 
   return {
     startingBalanceArr,
@@ -67,5 +85,6 @@ export const iterationCostsAndEarningsHPM = ({
     closingBalanceArr,
     earningsTotal,
     costsTotal,
+    opportynityCosts,
   };
 };

@@ -11,6 +11,7 @@ import Typography from 'components/Typography';
 import styles from './chart-component.module.scss';
 import { ChartBarItem } from './partials/ChartBarItem';
 import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
+import { useTranslation } from 'react-i18next';
 
 type ChartComponentProps = {
   label: string;
@@ -58,6 +59,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
   const openModalHandler = () => setOpen(true);
   const closeModalHandler = () => setOpen(false);
 
+  const { t } = useTranslation();
+
   return (
     <Box className={styles.root}>
       <ModalDetailedView
@@ -69,6 +72,50 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         costsArr={costsArr}
         closingBalanceArr={closingBalanceArr}
       />
+
+      <Stack direction="row" spacing={0} sx={{ width: '100%' }}>
+        {initialCapitalPercent ? (
+          <ChartBarItem
+            percentageWidth={initialCapitalPercent}
+            label={t('outputs.bars.investment')}
+            value={initialCapital}
+            color="grey"
+            isAsPc
+          />
+        ) : null}
+
+        {totalEarningsPercent ? (
+          <ChartBarItem
+            percentageWidth={totalEarningsPercent}
+            label={t('outputs.bars.totalEarnings')}
+            value={earningsTotal}
+            color="green"
+            // ifNeedToMiddle={initialCapitalPercent < 2}
+            ifNeedToGetUp={totalEarningsPercent < 30}
+          />
+        ) : null}
+
+        {constsPercent ? (
+          <ChartBarItem
+            percentageWidth={constsPercent}
+            label={t('outputs.bars.costs')}
+            value={-costsTotal}
+            color="red1"
+            // ifNeedToGetUp={totalEarningsPercent - constsPercent <= 20}
+          />
+        ) : null}
+
+        {oportynityCostsPercent && opportynityCosts ? (
+          <ChartBarItem
+            percentageWidth={oportynityCostsPercent}
+            label={t('outputs.bars.compoundInterest')}
+            value={opportynityCosts}
+            color="red2"
+            ifNeedToGetUp={true}
+          />
+        ) : null}
+      </Stack>
+
       <Box className={styles.root__heading}>
         <Typography preset="common-1" color="darkgreyed" fontFamily="poppins">
           {label}
@@ -80,51 +127,10 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             fontFamily="poppins"
             isUnderlined
           >
-            View details
+            {t('outputs.details')}
           </Typography>
         </button>
       </Box>
-      <Stack direction="row" spacing={0} sx={{ width: '100%' }}>
-        {initialCapitalPercent ? (
-          <ChartBarItem
-            percentageWidth={initialCapitalPercent}
-            label="Investment"
-            value={initialCapital}
-            color="grey"
-            isAsPc
-          />
-        ) : null}
-
-        {totalEarningsPercent ? (
-          <ChartBarItem
-            percentageWidth={totalEarningsPercent}
-            label="Total earnings"
-            value={earningsTotal}
-            color="green"
-            ifNeedToMiddle={totalEarningsPercent - initialCapitalPercent >= 20}
-          />
-        ) : null}
-
-        {constsPercent ? (
-          <ChartBarItem
-            percentageWidth={constsPercent}
-            label="Costs"
-            value={-costsTotal}
-            color="red1"
-            ifNeedToGetUp={totalEarningsPercent - constsPercent <= 20}
-          />
-        ) : null}
-
-        {oportynityCostsPercent && opportynityCosts ? (
-          <ChartBarItem
-            percentageWidth={oportynityCostsPercent}
-            label="Opportunity cost"
-            value={opportynityCosts}
-            color="red2"
-            ifNeedToGetUp={true}
-          />
-        ) : null}
-      </Stack>
     </Box>
   );
 };

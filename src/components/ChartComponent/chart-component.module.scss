@@ -1,17 +1,35 @@
 .root {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 95px;
   gap: 8px;
 
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+
   &__heading {
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
 
-    width: 60%;
+    word-wrap: break-word;
 
-    gap: 20px;
+    min-width: 13%;
+    max-width: 13%;
+
+    gap: 10px;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+
+      gap: 5px;
+
+      min-width: 45%;
+      max-width: 45%;
+    }
   }
 }

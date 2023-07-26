@@ -9,11 +9,11 @@ import i18n from 'i18';
 
 const lngs: Record<string, string> = {
   en: 'en',
-  ax: 'ax',
+  fi: 'fi',
 };
 
 const TheHeader = () => {
-  const [locale, setLocale] = useState<string>('en');
+  const [locale, setLocale] = useState<string>('fi');
 
   const localeChangeHandler = (event: SelectChangeEvent) => {
     setLocale(event.target.value);

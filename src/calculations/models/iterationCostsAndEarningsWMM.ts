@@ -52,21 +52,22 @@ export const iterationCostsAndEarningsWMM = ({
     earningsTotal = currency(earningsTotal).add(newEarning).value;
     costsTotal = currency(costsTotal).add(newCost).value;
   }
+
   earningsTotal = currency(closingBalanceArr[investmentDuration - 1]).subtract(
     initialCapital
   ).value;
   costsTotal = Math.round(costsTotal);
 
-  console.log('earningsNCM ', earningsNCM);
-  console.log('earningsTotal ', earningsTotal);
-  console.log('costsTotal ', costsTotal);
-
   const opportynityCosts =
-    earningsTotal + costsTotal < earningsNCM
-      ? currency(earningsNCM).subtract(earningsTotal).subtract(-costsTotal).value
+    earningsTotal - costsTotal < earningsNCM
+      ? currency(earningsNCM).subtract(earningsTotal).subtract(-costsTotal)
+          .value
       : 0;
 
-  // console.log('opportynityCosts ', opportynityCosts);
+  console.log('earningsNCM - wmm ', earningsNCM);
+  console.log('earningsTotal -wmm ', earningsTotal);
+  console.log('costsTotal - wmm ', costsTotal);
+  console.log('opportynityCosts - wmm', opportynityCosts);
 
   return {
     startingBalanceArr,

@@ -7,11 +7,48 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: 'en',
+    fallbackLng: 'fi',
     interpolation: {
       escapeValue: false,
     },
     resources: {
+      fi: {
+        translation: {
+          title: 'Varainhoidon kustannuslaskuri',
+          calculator: {
+            heading: 'Lähtötiedot',
+            paramas: {
+              initial: 'Alkupääoma',
+              investment: 'Sijoituksen kestoaika',
+              annual: 'Vuotuinen tuotto-odotus',
+              fees: 'Hallinnointi- ja tuotepalkkiot',
+              years: 'vuotta',
+            },
+          },
+          outputs: {
+            heading: 'Varainhoidon kustannusten vaikutus tuottoon',
+            details: 'Näytä lisää',
+            models: {
+              wmm: 'Prosenttihinnoiteltu malli',
+              hpm: 'Tuntihinnoiteltu malli',
+              ncm: 'Tee se itse -malli',
+            },
+            bars: {
+              investment: 'Alkupääoma',
+              totalEarnings: 'Tuotot',
+              costs: 'Suorat kustannukset',
+              compoundInterest: 'Mahdollisuus hinta', //FIXME: renamed!!
+            },
+          },
+          modal: {
+            years: 'Vuosia',
+            startingBalance: 'Aloitussaldo',
+            earnings: 'Tulot',
+            costs: 'Kustannukset',
+            closingBalance: 'Loppusaldo',
+          },
+        },
+      },
       en: {
         translation: {
           title: 'Wealth management cost calculator',
@@ -25,51 +62,28 @@ i18n
               years: 'years',
             },
           },
-          outputs:{
-            heading:"Impact on wealth management fees on total gains",
-            details:"View details",
-            models:{
-              wmm:"Wealth management model", 
-              hpm:"Hourly priced model",
-              ncm:"No cost model",
+          outputs: {
+            heading: 'Impact on wealth management fees on total gains',
+            details: 'View details',
+            models: {
+              wmm: 'Wealth management model',
+              hpm: 'Hourly priced model',
+              ncm: 'No cost model',
             },
-            bars:{
-              investment:"Investment",
-              totalEarnings:"Total Earnings",
-              costs:"Costs",
-              compoundInterest:"Opportunity cost"
-            }
-          }
-        },
-      },
-      ax: {
-        translation: {
-          title: 'Wealth management cost calculator',
-          calculator: {
-            heading: 'Data for calculate',
-            paramas: {
-              initial: 'Initial capital',
-              investment: 'Investment duration',
-              annual: 'Annual gain expectation',
-              fees: 'Wealth management & product fees',
-              years: 'years',
+            bars: {
+              investment: 'Investment',
+              totalEarnings: 'Total Earnings',
+              costs: 'Costs',
+              compoundInterest: 'Opportunity cost',
             },
           },
-          outputs:{
-            heading:"Impact on wealth management fees on total gains",
-            details:"View details",
-            models:{
-              wmm:"Wealth management model", 
-              hpm:"Hourly priced model",
-              ncm:"No cost model",
-            },
-            bars:{
-              investment:"Investment",
-              totalEarnings:"Total Earnings",
-              costs:"Costs",
-              compoundInterest:"Opportunity cost"
-            }
-          }
+          modal: {
+            years: 'Years',
+            startingBalance: 'Starting Balance',
+            earnings: 'Earnings',
+            costs: 'Costs',
+            closingBalance: 'Closing Balance',
+          },
         },
       },
     },
