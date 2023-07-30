@@ -15,7 +15,7 @@ export const iterationCostsAndEarningsHPM = ({
   opportynityCosts: number;
 } => {
   annualGainExpectation = currency(annualGainExpectation).divide(100).value;
-  wmAndProductFees = currency(wmAndProductFees).divide(100).value;
+  wmAndProductFees = Number((wmAndProductFees * 0.01).toFixed(3));
   let newEarning,
     newCost,
     closingBalance,
@@ -73,10 +73,10 @@ export const iterationCostsAndEarningsHPM = ({
           .value
       : 0;
 
-  console.log('earningsNCM - hpm ', earningsNCM);
-  console.log('earningsTotal -hpm ', earningsTotal);
-  console.log('costsTotal - hpm', costsTotal);
-  console.log('opportynityCosts - hpm', opportynityCosts);
+  // console.log('earningsNCM - hpm ', earningsNCM);
+  // console.log('earningsTotal -hpm ', earningsTotal);
+  // console.log('costsTotal - hpm', costsTotal);
+  // console.log('opportynityCosts - hpm', opportynityCosts);
 
   return {
     startingBalanceArr,

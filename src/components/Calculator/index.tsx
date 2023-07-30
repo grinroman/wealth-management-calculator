@@ -79,6 +79,8 @@ const Calculator: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log('wmAndProductFees change! ', wmAndProductFees);
+
     let inputCalcObj = {
       initialCapital,
       investmentDuration,

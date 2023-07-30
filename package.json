@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^13.0.2",
     "react-scripts": "^5.0.1",
+    "serve": "^14.2.0",
     "typescript": "^4.9.5",
     "uninstall": "^0.0.0",
     "web-vitals": "^2.1.4"
@@ -31,6 +32,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "aws s3 sync build/ s3://wealth-management-calculator",
+    "prod": "npm run build && npm run deploy",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

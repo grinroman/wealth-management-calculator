@@ -37,13 +37,13 @@ i18n
               investment: 'Alkupääoma',
               totalEarnings: 'Tuotot',
               costs: 'Suorat kustannukset',
-              compoundInterest: 'Mahdollisuus hinta', //FIXME: renamed!!
+              compoundInterest: 'Vaihtoehtoiskustannus',
             },
           },
           modal: {
-            years: 'Vuosia',
+            years: 'Vuosi',
             startingBalance: 'Aloitussaldo',
-            earnings: 'Tulot',
+            earnings: 'Tuotot',
             costs: 'Kustannukset',
             closingBalance: 'Loppusaldo',
           },

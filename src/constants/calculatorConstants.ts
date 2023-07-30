@@ -14,6 +14,6 @@ export const ANNUAL_GAIN_EXPECTATION_MAX = 100;
 export const ANNUAL_GAIN_EXPECTATION_STEP = 1;
 
 export const W_M_AND_PROD_FEES_DEFAULT = 1.0;
-export const W_M_AND_PROD_FEES_MIN = 1.0;
+export const W_M_AND_PROD_FEES_MIN = 0.1;
 export const W_M_AND_PROD_FEES_MAX = 10.0;
 export const W_M_AND_PROD_FEES_STEP = 0.1;

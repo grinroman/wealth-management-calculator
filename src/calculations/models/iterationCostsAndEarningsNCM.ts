@@ -10,7 +10,7 @@ export const iterationCostsAndEarningsNCM = ({
   wmAndProductFees,
 }: InputCostsEarningsCalcType): OutputCostsEarningsIterationType => {
   annualGainExpectation = currency(annualGainExpectation).divide(100).value;
-  wmAndProductFees = currency(wmAndProductFees).divide(100).value;
+  wmAndProductFees = Number((wmAndProductFees * 0.01).toFixed(3));
   let newEarning,
     newCost,
     closingBalance,

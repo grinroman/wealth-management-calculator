@@ -111,7 +111,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             label={t('outputs.bars.compoundInterest')}
             value={opportynityCosts}
             color="red2"
-            ifNeedToGetUp={true}
+            ifNeedToMiddle
           />
         ) : null}
       </Stack>

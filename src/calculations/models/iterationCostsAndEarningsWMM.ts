@@ -15,7 +15,8 @@ export const iterationCostsAndEarningsWMM = ({
   opportynityCosts: number;
 } => {
   annualGainExpectation = currency(annualGainExpectation).divide(100).value;
-  wmAndProductFees = currency(wmAndProductFees).divide(100).value;
+  wmAndProductFees = Number((wmAndProductFees * 0.01).toFixed(3));
+
   let newEarning,
     newCost,
     closingBalance,
@@ -33,9 +34,9 @@ export const iterationCostsAndEarningsWMM = ({
       newEarning = currency(annualGainExpectation).multiply(
         startingBalance
       ).value;
-      newCost = currency(wmAndProductFees).multiply(
-        currency(startingBalance).add(newEarning).multiply(-1)
-      ).value;
+      newCost =
+        wmAndProductFees *
+        currency(startingBalance).add(newEarning).multiply(-1).value;
     } else {
       newCost = 0;
       newEarning = 0;
@@ -64,10 +65,10 @@ export const iterationCostsAndEarningsWMM = ({
           .value
       : 0;
 
-  console.log('earningsNCM - wmm ', earningsNCM);
-  console.log('earningsTotal -wmm ', earningsTotal);
-  console.log('costsTotal - wmm ', costsTotal);
-  console.log('opportynityCosts - wmm', opportynityCosts);
+  // console.log('earningsNCM - wmm ', earningsNCM);
+  // console.log('earningsTotal -wmm ', earningsTotal);
+  // console.log('costsTotal - wmm ', costsTotal);
+  // console.log('opportynityCosts - wmm', opportynityCosts);
 
   return {
     startingBalanceArr,
