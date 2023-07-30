@@ -1,5 +1,31 @@
 @import 'src/styles/mixins.scss';
 
+.isRed1 {
+  background: repeating-linear-gradient(
+    -60deg,
+    get-color(redded, base),
+    get-color(redded, base) 1px,
+    get-color(redded, secondary) 1px,
+    get-color(redded, secondary) 5px
+  );
+  border: 1.6px solid get-color(redded, base);
+}
+
+.isRed2 {
+  background: get-color(redded, secondary);
+  border: 1.6px solid get-color(redded, secondary);
+}
+
+.isGrey {
+  background: get-color(lightgreyed, base);
+  border: 1.6px solid get-color(lightgreyed, base);
+}
+
+.isGreen {
+  background: get-color(greened, base);
+  border: 1.6px solid get-color(greened, base);
+}
+
 .root {
   height: 32px;
 
@@ -7,7 +33,6 @@
 
   &__tip {
     min-width: 100px;
-    max-width: 150px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -15,15 +40,6 @@
     position: absolute;
     top: 70%;
     left: 30%;
-
-    @media (max-width: 900px) {
-      left: initial;
-      right: 20%;
-
-      border-radius: 4px;
-
-      align-items: end;
-    }
 
     &__label,
     &__pricing {
@@ -35,106 +51,54 @@
 
       padding-top: 10px;
 
-      width: content-fit;
       min-height: 32px;
 
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
 
-      @media (max-width: 900px) {
-        border-left: none;
-        border-right: 1px solid get-color(greyed, base);
-
-        justify-content: flex-start;
-        align-items: end;
-
-        padding-left: 0;
-        padding-right: 4px;
-      }
-    }
-
-    &__pricing {
-      height: auto;
-
-      @media (max-width: 900px) {
-        padding-right: 4px;
+      &__pricing {
+        height: auto;
       }
     }
   }
 }
 
-.isAsPcTip {
-  @media (max-width: 900px) {
-    top: 70%;
-    left: 10%;
+.tipBottomReverse {
+  min-width: 140px;
+  gap: 2px;
 
-    border-radius: none;
+  position: absolute;
+  top: 70%;
+  left: initial;
+  right: 30%;
 
-    align-items: initial;
-  }
-}
-
-.isAsPcLabel {
-  @media (max-width: 900px) {
-    border-right: none;
-    border-left: 1px solid get-color(greyed, base);
-
-    padding-top: 10px;
-
-    width: content-fit;
-    min-height: 32px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: start;
-
-    padding-left: 4px;
-  }
-}
-
-.isAsPcPricing {
-  @media (max-width: 900px) {
-    padding-right: none;
-  }
+  align-items: end;
 }
 
 .tipTop {
   min-width: 140px;
   gap: 2px;
 
-  top: -130%;
+  top: -110%;
   left: initial;
-  right: 20%;
+  right: 30%;
 
   flex-direction: column-reverse;
   align-items: end;
-
-  @media (max-width: 900px) {
-    left: initial;
-    right: 50%;
-  }
 }
-
-// .tipTopRight {
-//   min-width: 140px;
-//   gap: 2px;
-
-//   top: -150%;
-//   left: 20%;
-
-//   flex-direction: column-reverse;
-//   align-items: end;
-
-//   @media (max-width: 900px) {
-//     left: initial;
-//     right: 50%;
-//   }
-// }
 
 .labelBottomMiddle {
   left: 50%;
+}
+
+.labelBottomReverse {
+  padding-right: 4px;
+
+  border-left: none;
+  border-right: 1px solid get-color(greyed, base);
+
+  align-items: end;
 }
 
 .labelTop {
@@ -154,14 +118,6 @@
   padding-right: 4px;
 }
 
-.isRed1 {
-  border: 1.6px solid get-color(redded, base);
-}
-
-.isRed2 {
-  border: 1.6px solid get-color(redded, secondary);
-}
-
-.isGrey {
-  border: 1.6px solid #e8e9e9;
+.pricingBottomReverse {
+  padding-right: 4px;
 }

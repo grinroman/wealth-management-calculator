@@ -6,6 +6,7 @@ import {
   TableHead,
   TableBody,
   TableContainer,
+  TableFooter,
   Box,
   Modal,
 } from '@mui/material';
@@ -19,6 +20,8 @@ import { useTranslation } from 'react-i18next';
 type ModalDetailedViewProps = {
   title: string;
   isOpen: boolean;
+  earningsTotal: number;
+  costsTotal: number;
   startingBalanceArr: number[];
   earningArr: number[];
   costsArr: number[];
@@ -30,6 +33,8 @@ type ModalDetailedViewProps = {
 export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
   title,
   isOpen,
+  earningsTotal,
+  costsTotal,
   startingBalanceArr,
   earningArr,
   costsArr,
@@ -102,7 +107,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     fontFamily="poppins"
                     className={styles.root__modalTable__headerBordered}
                   >
-                    Starting balance&nbsp;
+                    {t('modal.startingBalance')}&nbsp;
                   </Typography>
                 </TableCell>
                 <TableCell align="left">
@@ -142,11 +147,7 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                   key={row.year}
                   className={styles.root__modalTable__bodyRow}
                 >
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    // sx={{ borderRadius: '10px 0 0 10px' }}
-                  >
+                  <TableCell component="th" scope="row" align="left">
                     <Typography
                       preset="price-3"
                       color="blacked"
@@ -197,6 +198,66 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                 </TableRow>
               ))}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell align="left">
+                  <Typography
+                    preset="common-1"
+                    color="greyed"
+                    fontFamily="poppins"
+                  >
+                   {t('modal.total')}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow className={styles.root__modalTable__bodyRow}>
+                <TableCell align="left">
+                  <Typography
+                    preset="common-1"
+                    color="greyed"
+                    fontFamily="poppins"
+                  >
+                    &nbsp;
+                  </Typography>
+                </TableCell>
+                <TableCell align="left">
+                  <Typography
+                    preset="common-1"
+                    color="greyed"
+                    fontFamily="poppins"
+                  >
+                    &nbsp;
+                  </Typography>
+                </TableCell>
+                <TableCell align="left">
+                  <Typography
+                    preset="price-3"
+                    color="greened"
+                    fontFamily="poppins"
+                  >
+                    {splitEvery3DigitWithSpace(earningsTotal)}&nbsp;€
+                  </Typography>
+                </TableCell>
+                <TableCell align="left">
+                  <Typography
+                    preset="price-3"
+                    color="redded"
+                    fontFamily="poppins"
+                  >
+                    {splitEvery3DigitWithSpace(costsTotal)}&nbsp;€
+                  </Typography>
+                </TableCell>
+                <TableCell align="left">
+                  <Typography
+                    preset="common-1"
+                    color="greyed"
+                    fontFamily="poppins"
+                  >
+                    &nbsp;
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
       </Box>

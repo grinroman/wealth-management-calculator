@@ -6,16 +6,10 @@ import Typography from 'components/Typography';
 import { splitEvery3DigitWithSpace } from 'calculations/common/splitEvery3DigitWithSpace';
 
 enum Color {
-  grey = '#E8E9E9',
-  green = '#53B7A1',
-  red1 = `repeating-linear-gradient(
-    -60deg,
-    #F28181,
-    #F28181 1px,
-    #ffeded 1px,
-    #ffeded 5px
-  );`,
-  red2 = '#ffeded',
+  grey = 'isGrey',
+  green = 'isGreen',
+  red1 = `isRed1`,
+  red2 = 'isRed2',
 }
 
 type ChartBarItemProps = {
@@ -25,8 +19,7 @@ type ChartBarItemProps = {
   color: 'grey' | 'green' | 'red1' | 'red2';
   ifNeedToGetUp?: boolean;
   ifNeedToMiddle?: boolean;
-  isAsPc?: boolean;
-  ifNeedToGetUpAndReverse?:boolean;
+  ifNeedToReverseTip?: boolean;
 };
 
 export const ChartBarItem: React.FC<ChartBarItemProps> = ({
@@ -36,37 +29,29 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
   color,
   ifNeedToGetUp,
   ifNeedToMiddle,
-  isAsPc,
-  ifNeedToGetUpAndReverse
+  ifNeedToReverseTip,
 }) => {
   return (
     <Box
       sx={{
-        background: Color[color],
         width: `${percentageWidth}%`,
       }}
-      className={clsx(
-        styles.root,
-        color === 'red1' && styles['isRed1'],
-        color === 'red2' && styles['isRed2'],
-        color === 'grey' && styles['isGrey']
-      )}
+      className={clsx(styles.root, styles[Color[color]])}
     >
       {!!value && (
         <div
           className={clsx(
             styles.root__tip,
-            isAsPc && styles['isAsPcTip'],
             ifNeedToGetUp && styles['tipTop'],
             ifNeedToMiddle && styles['labelBottomMiddle'],
-            // ifNeedToGetUpAndReverse && styles['tipTopRight']
+            ifNeedToReverseTip && styles['tipBottomReverse']
           )}
         >
           <div
             className={clsx(
               styles.root__tip__label,
               ifNeedToGetUp && styles['labelTop'],
-              isAsPc && styles['isAsPcLabel']
+              ifNeedToReverseTip && styles['labelBottomReverse']
             )}
           >
             <Typography preset="subtitle-2" color="greyed" fontFamily="poppins">
@@ -77,7 +62,7 @@ export const ChartBarItem: React.FC<ChartBarItemProps> = ({
             className={clsx(
               styles.root__tip__pricing,
               ifNeedToGetUp && styles['pricingTop'],
-              isAsPc && styles['isAsPcPricing']
+              ifNeedToReverseTip && styles['pricingBottomReverse']
             )}
           >
             <Typography preset="price-2" color="blacked" fontFamily="poppins">

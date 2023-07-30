@@ -193,6 +193,7 @@ const Calculator: React.FC = () => {
                 label={t('outputs.models.hpm')}
                 initialCapital={initialCapital}
                 chartInfo={stateHPM}
+                isHPM
               />
             )}
             {stateNCM && (

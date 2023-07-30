@@ -12,18 +12,27 @@ import styles from './chart-component.module.scss';
 import { ChartBarItem } from './partials/ChartBarItem';
 import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
 import { useTranslation } from 'react-i18next';
+import { Breakpoint, useBreakpoints } from 'components/hooks/useBreakpoints';
 
 type ChartComponentProps = {
   label: string;
   initialCapital: number;
   chartInfo: OutputCostsEarningsIterationType & { opportynityCosts?: number };
+  isHPM?: boolean;
 };
 
 const ChartComponent: React.FC<ChartComponentProps> = ({
   label,
   initialCapital,
   chartInfo,
+  isHPM,
 }) => {
+  const [isTablet, setIsTablet] = useState<boolean>(false);
+
+  useBreakpoints((breakpoint) => {
+    setIsTablet(breakpoint <= Breakpoint.TABLET);
+  });
+
   const {
     startingBalanceArr,
     earningArr,
@@ -67,6 +76,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         title={label}
         handleClose={closeModalHandler}
         isOpen={open}
+        earningsTotal={earningsTotal}
+        costsTotal={costsTotal}
         startingBalanceArr={startingBalanceArr}
         earningArr={earningArr}
         costsArr={costsArr}
@@ -80,7 +91,6 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             label={t('outputs.bars.investment')}
             value={initialCapital}
             color="grey"
-            isAsPc
           />
         ) : null}
 
@@ -90,8 +100,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             label={t('outputs.bars.totalEarnings')}
             value={earningsTotal}
             color="green"
-            // ifNeedToMiddle={initialCapitalPercent < 2}
-            ifNeedToGetUp={totalEarningsPercent < 30}
+            ifNeedToGetUp={totalEarningsPercent < (isTablet ? 60 : 30)}
           />
         ) : null}
 
@@ -101,7 +110,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             label={t('outputs.bars.costs')}
             value={-costsTotal}
             color="red1"
-            // ifNeedToGetUp={totalEarningsPercent - constsPercent <= 20}
+            ifNeedToReverseTip={isHPM}
           />
         ) : null}
 
@@ -111,7 +120,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             label={t('outputs.bars.compoundInterest')}
             value={opportynityCosts}
             color="red2"
-            ifNeedToMiddle
+            // ifNeedToMiddle={oportynityCostsPercent >= 20}
+            ifNeedToGetUp
           />
         ) : null}
       </Stack>
