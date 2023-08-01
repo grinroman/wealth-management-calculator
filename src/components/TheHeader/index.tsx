@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { AppBar, FormControl, Select, MenuItem, Toolbar } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 
-import { useTranslation, Trans } from 'react-i18next';
-
 import styles from './the-header.module.scss';
 import i18n from 'i18';
 

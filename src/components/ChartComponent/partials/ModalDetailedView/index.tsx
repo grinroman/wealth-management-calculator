@@ -206,7 +206,26 @@ export const ModalDetailedView: React.FC<ModalDetailedViewProps> = ({
                     color="greyed"
                     fontFamily="poppins"
                   >
-                   {t('modal.total')}
+                    {t('modal.total')}
+                  </Typography>
+                </TableCell>
+                <TableCell align="left">{''}</TableCell>
+                <TableCell align="left">
+                  <Typography
+                    preset="common-1"
+                    color="greyed"
+                    fontFamily="poppins"
+                  >
+                    {t('modal.earnings')}&nbsp;
+                  </Typography>
+                </TableCell>
+                <TableCell align="left">
+                  <Typography
+                    preset="common-1"
+                    color="greyed"
+                    fontFamily="poppins"
+                  >
+                    {t('modal.costs')}&nbsp;
                   </Typography>
                 </TableCell>
               </TableRow>

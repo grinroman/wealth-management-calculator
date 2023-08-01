@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Stack, Paper, styled } from '@mui/material';
-import { roundUpToWholePart } from 'calculations/common/roundUpToWholePart';
-import { splitEvery3DigitWithSpace } from 'calculations/common/splitEvery3DigitWithSpace';
-
-import { InputCostsEarningsCalcType } from 'types/InputCostsEarningsCalcType';
+import { Box, Stack} from '@mui/material';
 import { ModalDetailedView } from './partials/ModalDetailedView';
 import { getChartValuesInPercentMeasure } from 'calculations/common/getChartValuesInPercentMeasure';
 import Typography from 'components/Typography';
@@ -12,7 +8,7 @@ import styles from './chart-component.module.scss';
 import { ChartBarItem } from './partials/ChartBarItem';
 import { OutputCostsEarningsIterationType } from 'types/OutputCostsEarningsIterationType';
 import { useTranslation } from 'react-i18next';
-import { Breakpoint, useBreakpoints } from 'components/hooks/useBreakpoints';
+import { Breakpoint, useBreakpoints } from 'hooks/useBreakpoints';
 
 type ChartComponentProps = {
   label: string;
