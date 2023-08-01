@@ -1,0 +1,123 @@
+@import 'src/styles/mixins.scss';
+
+.isRed1 {
+  background: repeating-linear-gradient(
+    -60deg,
+    get-color(redded, base),
+    get-color(redded, base) 1px,
+    get-color(redded, secondary) 1px,
+    get-color(redded, secondary) 5px
+  );
+  border: 1.6px solid get-color(redded, base);
+}
+
+.isRed2 {
+  background: get-color(redded, secondary);
+  border: 1.6px solid get-color(redded, secondary);
+}
+
+.isGrey {
+  background: get-color(lightgreyed, base);
+  border: 1.6px solid get-color(lightgreyed, base);
+}
+
+.isGreen {
+  background: get-color(greened, base);
+  border: 1.6px solid get-color(greened, base);
+}
+
+.root {
+  height: 32px;
+
+  position: relative;
+
+  &__tip {
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    position: absolute;
+    top: 70%;
+    left: 30%;
+
+    &__label,
+    &__pricing {
+      padding-left: 4px;
+    }
+
+    &__label {
+      border-left: 1px solid get-color(greyed, base);
+
+      padding-top: 10px;
+
+      min-height: 32px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      &__pricing {
+        height: auto;
+      }
+    }
+  }
+}
+
+.tipBottomReverse {
+  min-width: 140px;
+  gap: 2px;
+
+  position: absolute;
+  top: 70%;
+  left: initial;
+  right: 30%;
+
+  align-items: end;
+}
+
+.tipTop {
+  min-width: 140px;
+  gap: 2px;
+
+  top: -110%;
+  left: initial;
+  right: 30%;
+
+  flex-direction: column-reverse;
+  align-items: end;
+}
+
+.labelBottomMiddle {
+  left: 50%;
+}
+
+.labelBottomReverse {
+  padding-right: 4px;
+
+  border-left: none;
+  border-right: 1px solid get-color(greyed, base);
+
+  align-items: end;
+}
+
+.labelTop {
+  padding-top: 0;
+  padding-bottom: 8px;
+  padding-right: 4px;
+  padding-left: 0;
+
+  justify-content: flex-start;
+  align-items: end;
+
+  border-left: none;
+  border-right: 1px solid get-color(greyed, base);
+}
+
+.pricingTop {
+  padding-right: 4px;
+}
+
+.pricingBottomReverse {
+  padding-right: 4px;
+}

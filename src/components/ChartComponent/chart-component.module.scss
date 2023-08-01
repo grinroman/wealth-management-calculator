@@ -1,0 +1,34 @@
+.root {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 95px;
+  gap: 8px;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
+
+  &__heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    word-wrap: break-word;
+
+    min-width: 14%;
+    max-width: 14%;
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+      max-width: 100%;
+
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 15px;
+    }
+  }
+}

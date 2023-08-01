@@ -5,17 +5,7 @@ import TheHeader from 'components/TheHeader';
 function App() {
   return (
     <>
-      <Container
-        fixed
-        disableGutters
-        sx={{
-          backgroundColor: 'skyblue',
-          maxHeight: '100vh',
-          maxWidth: '100vw',
-          minWidth: 'calc(100vw - 64px)',
-          minHeight: '100vh',
-        }}
-      >
+      <Container fixed disableGutters className="container">
         <TheHeader />
         <Calculator />
       </Container>
